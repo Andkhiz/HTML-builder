@@ -1,6 +1,6 @@
 import path from 'path';
 import {fileURLToPath} from 'url';
-import { open, mkdir, readdir, readFile, appendFile, unlink } from 'node:fs/promises';
+import { open, readdir, readFile, appendFile } from 'node:fs/promises';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,7 +10,7 @@ const dirNamePaste = path.join(__dirname, "project-dist");
 const fileStyleName = path.join(dirNamePaste, "bundle.css");
 
 try {
-  const createFileStyleCSS = open(fileStyleName, "w");
+  await open(fileStyleName, "w");
   const files = await readdir(dirNameStyle, {withFileTypes: true});
   for ( let file of files ) {
     if ( file.isFile() ) {
